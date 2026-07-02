@@ -599,27 +599,32 @@
       .chunk {
         font-size: 20px;
         line-height: 1.7;
-        color: var(--muted);
-        margin-bottom: 32px;
-        padding: 0;
+        color: var(--ink);
+        opacity: 0.35;
+        margin-bottom: 24px;
+        padding: 8px 12px;
+        border-radius: 8px;
         cursor: pointer;
-        transition: color 0.3s ease;
+        transition: opacity 0.3s ease, background 0.2s ease;
         max-width: 65ch;
         white-space: pre-wrap;
       }
       .chunk:hover {
-        color: var(--ink);
+        opacity: 0.6;
+        background: var(--hair2);
       }
       .chunk.active {
-        color: var(--ink);
+        opacity: 1;
+        background: var(--hair2);
         font-weight: 500;
       }
       .toc-menu {
         position: absolute;
         top: 48px;
         right: 0;
-        width: 260px;
-        max-height: 400px;
+        width: 300px;
+        max-width: 85vw;
+        max-height: 60vh;
         overflow-y: auto;
         background: var(--card);
         border: 1px solid var(--hair);
@@ -1753,23 +1758,30 @@
         const chapters = useMemo(() => {
           if (!book || !book.chunks) return [];
           const chaps = [];
+          
           book.chunks.forEach((c, i) => {
             const firstLine = c.split("\n")[0].trim();
-            if (
-              /^(Chapter|Part|Prologue|Epilogue|Author's Note|Introduction)/i.test(
-                firstLine,
-              )
-            ) {
-              chaps.push({ idx: i, title: firstLine });
-            } else if (
-              firstLine.length < 50 &&
-              firstLine === firstLine.toUpperCase() &&
-              firstLine.match(/[A-Z]/)
-            ) {
-              chaps.push({ idx: i, title: firstLine });
+            if (firstLine.length > 80) return;
+            
+            const isChapterRegex = /^(Chapter|Part|Prologue|Epilogue|Author's Note|Introduction|Acknowledgments|About the Author|Dedication|Foreword)/i;
+            const isNumberRegex = /^(\d+|[IVXLCDM]+)[\.\-]?$/i;
+            const isAllCaps = firstLine.length > 2 && firstLine === firstLine.toUpperCase() && /[A-Z]/.test(firstLine);
+
+            if (isChapterRegex.test(firstLine) || isNumberRegex.test(firstLine) || isAllCaps) {
+              chaps.push({ idx: i, title: isNumberRegex.test(firstLine) ? "Chapter " + firstLine : firstLine });
             }
           });
-          return chaps;
+
+          // Filter out dense literal TOC dumps
+          const validChaps = [];
+          for (let i = 0; i < chaps.length; i++) {
+             let isDenseCluster = false;
+             if (i + 3 < chaps.length && (chaps[i+3].idx - chaps[i].idx <= 5)) isDenseCluster = true;
+             if (i >= 3 && (chaps[i].idx - chaps[i-3].idx <= 5)) isDenseCluster = true;
+             if (!isDenseCluster) validChaps.push(chaps[i]);
+          }
+          
+          return validChaps.length > 0 ? validChaps : chaps;
         }, [book]);
 
         // Restore book from IndexedDB on first mount
