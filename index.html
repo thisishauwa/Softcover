@@ -1,0 +1,2371 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Softcover — turn any book into a listen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script>
+      /* htm v3.1.1 — (c) Jason Miller, Apache-2.0 — inlined so the app has one less network dependency */
+      !(function (n, e) {
+        "object" == typeof exports && "undefined" != typeof module
+          ? (module.exports = e())
+          : "function" == typeof define && define.amd
+            ? define(e)
+            : (n.htm = e());
+      })(this, function () {
+        var n = function (e, t, u, s) {
+            var r;
+            t[0] = 0;
+            for (var p = 1; p < t.length; p++) {
+              var h = t[p++],
+                o = t[p] ? ((t[0] |= h ? 1 : 2), u[t[p++]]) : t[++p];
+              3 === h
+                ? (s[0] = o)
+                : 4 === h
+                  ? (s[1] = Object.assign(s[1] || {}, o))
+                  : 5 === h
+                    ? ((s[1] = s[1] || {})[t[++p]] = o)
+                    : 6 === h
+                      ? (s[1][t[++p]] += o + "")
+                      : h
+                        ? ((r = e.apply(o, n(e, o, u, ["", null]))),
+                          s.push(r),
+                          o[0] ? (t[0] |= 2) : ((t[p - 2] = 0), (t[p] = r)))
+                        : s.push(o);
+            }
+            return s;
+          },
+          e = new Map();
+        return function (t) {
+          var u = e.get(this);
+          return (
+            u || ((u = new Map()), e.set(this, u)),
+            (u = n(
+              this,
+              u.get(t) ||
+                (u.set(
+                  t,
+                  (u = (function (n) {
+                    for (
+                      var e,
+                        t,
+                        u = 1,
+                        s = "",
+                        r = "",
+                        p = [0],
+                        h = function (n) {
+                          (1 === u &&
+                          (n || (s = s.replace(/^\s*\n\s*|\s*\n\s*$/g, "")))
+                            ? p.push(0, n, s)
+                            : 3 === u && (n || s)
+                              ? (p.push(3, n, s), (u = 2))
+                              : 2 === u && "..." === s && n
+                                ? p.push(4, n, 0)
+                                : 2 === u && s && !n
+                                  ? p.push(5, 0, !0, s)
+                                  : u >= 5 &&
+                                    ((s || (!n && 5 === u)) &&
+                                      (p.push(u, 0, s, t), (u = 6)),
+                                    n && (p.push(u, n, 0, t), (u = 6))),
+                            (s = ""));
+                        },
+                        o = 0;
+                      o < n.length;
+                      o++
+                    ) {
+                      o && (1 === u && h(), h(o));
+                      for (var f = 0; f < n[o].length; f++)
+                        ((e = n[o][f]),
+                          1 === u
+                            ? "<" === e
+                              ? (h(), (p = [p]), (u = 3))
+                              : (s += e)
+                            : 4 === u
+                              ? "--" === s && ">" === e
+                                ? ((u = 1), (s = ""))
+                                : (s = e + s[0])
+                              : r
+                                ? e === r
+                                  ? (r = "")
+                                  : (s += e)
+                                : '"' === e || "'" === e
+                                  ? (r = e)
+                                  : ">" === e
+                                    ? (h(), (u = 1))
+                                    : u &&
+                                      ("=" === e
+                                        ? ((u = 5), (t = s), (s = ""))
+                                        : "/" === e &&
+                                            (u < 5 || ">" === n[o][f + 1])
+                                          ? (h(),
+                                            3 === u && (p = p[0]),
+                                            (u = p),
+                                            (p = p[0]).push(2, 0, u),
+                                            (u = 0))
+                                          : " " === e ||
+                                              "\t" === e ||
+                                              "\n" === e ||
+                                              "\r" === e
+                                            ? (h(), (u = 2))
+                                            : (s += e)),
+                          3 === u && "!--" === s && ((u = 4), (p = p[0])));
+                    }
+                    return (h(), p);
+                  })(t)),
+                ),
+                u),
+              arguments,
+              [],
+            )).length > 1
+              ? u
+              : u[0]
+          );
+        };
+      });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <style>
+      :root {
+        --paper: #fbfaf8;
+        --card: #ffffff;
+        --ink: #191714;
+        --muted: #8b857b;
+        --hair: #e9e5de;
+        --hair2: #f1eee8;
+        --shadow:
+          0 1px 2px rgba(25, 23, 20, 0.05),
+          0 12px 40px -12px rgba(25, 23, 20, 0.14);
+        --transition-speed: 0.2s;
+      }
+      [data-dark] {
+        --paper: #18171a;
+        --card: #23212a;
+        --ink: #f0ede8;
+        --muted: #9a938c;
+        --hair: #32303a;
+        --hair2: #2c2a34;
+        --shadow:
+          0 1px 2px rgba(0, 0, 0, 0.2), 0 12px 40px -12px rgba(0, 0, 0, 0.5);
+      }
+      * {
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+      }
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family:
+          Inter,
+          -apple-system,
+          "Segoe UI",
+          sans-serif;
+        font-size: 15px;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        transition:
+          background var(--transition-speed) ease,
+          color var(--transition-speed) ease;
+      }
+      #root {
+        min-height: 100%;
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+      }
+      button {
+        font: inherit;
+        color: inherit;
+        background: none;
+        border: 0;
+        padding: 0;
+        cursor: pointer;
+      }
+      button:focus-visible,
+      input:focus-visible,
+      [tabindex]:focus-visible {
+        outline: 2px solid var(--ink);
+        outline-offset: 3px;
+        border-radius: 6px;
+      }
+      input {
+        font: inherit;
+        color: inherit;
+      }
+      ::selection {
+        background: var(--ink);
+        color: var(--paper);
+      }
+
+      .shell {
+        width: 100%;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 24px calc(28px + env(safe-area-inset-bottom));
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 44px;
+        margin-bottom: 20px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        padding: 20px 0 10px 0;
+        background: var(--paper);
+        transition: background var(--transition-speed) ease;
+      }
+      .wordmark {
+        font-family: Fraunces, serif;
+        font-weight: 600;
+        font-size: 17px;
+        letter-spacing: -0.01em;
+      }
+      .bar-actions {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .iconbtn {
+        width: 40px;
+        height: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        color: var(--muted);
+        transition:
+          color 0.15s ease,
+          transform 0.15s ease;
+        border: none;
+        outline: none;
+        background: transparent;
+      }
+      .iconbtn:hover {
+        color: var(--ink);
+        transform: scale(1.1);
+      }
+
+      /* ---------- empty state ---------- */
+      .empty {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+        text-align: center;
+      }
+      .drop {
+        width: 216px;
+        aspect-ratio: 2/3;
+        border-radius: 6px 14px 14px 6px;
+        background: var(--card);
+        border: 1px solid var(--hair);
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        color: var(--muted);
+        transition:
+          transform 0.25s ease,
+          border-color 0.2s ease,
+          background var(--transition-speed) ease;
+      }
+
+      /* Reverted to original spine */
+      .drop::before {
+        content: "";
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 7px;
+        background: var(--hair);
+      }
+
+      .drop.armed {
+        border-color: var(--ink);
+        transform: translateY(-4px);
+      }
+      .drop .dtitle {
+        font-family: Fraunces, serif;
+        font-size: 19px;
+        font-weight: 600;
+        color: var(--ink);
+      }
+      .drop .dsub {
+        font-size: 12.5px;
+        max-width: 150px;
+      }
+      .hint {
+        font-size: 13px;
+        color: var(--muted);
+        max-width: 280px;
+      }
+      .hint b {
+        color: var(--ink);
+        font-weight: 500;
+      }
+      .linkish {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        color: var(--ink);
+      }
+
+      /* ---------- player (split layout) ---------- */
+      .player {
+        flex: 1;
+        display: flex;
+        gap: 8vw;
+        align-items: flex-start;
+        padding-bottom: 60vh;
+      }
+
+      /* left column — cover + controls */
+      .player-left {
+        flex: 0 0 280px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        position: sticky;
+        top: 15vh;
+      }
+      .cover {
+        width: min(232px, 58vw);
+        aspect-ratio: 2/3;
+        border-radius: 6px 14px 14px 6px;
+        background: var(--card);
+        border: 1px solid var(--hair);
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 26px 22px 26px 30px;
+        transition: background var(--transition-speed) ease;
+      }
+      .cover-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: inherit;
+      }
+      /* spine sits on top of the image */
+      .cover::before {
+        content: "";
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 8px;
+        background: var(--spine, var(--hair));
+        z-index: 1;
+      }
+      .cover::after {
+        content: "";
+        position: absolute;
+        inset: 0 auto 0 8px;
+        width: 1px;
+        background: rgba(25, 23, 20, 0.08);
+        z-index: 1;
+      }
+      /* mob cover image */
+      .mob-cover-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: inherit;
+      }
+
+      .ctitle {
+        font-family: Fraunces, serif;
+        font-weight: 600;
+        text-align: center;
+        color: var(--ink);
+        font-size: clamp(16px, 4.4vw, 21px);
+        line-height: 1.28;
+        letter-spacing: -0.01em;
+        display: -webkit-box;
+        -webkit-line-clamp: 7;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        overflow-wrap: anywhere;
+      }
+      .meta {
+        margin-top: 26px;
+        text-align: center;
+      }
+      .btitle {
+        font-family: Fraunces, serif;
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        line-height: 1.3;
+        max-width: 280px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .bsub {
+        margin-top: 5px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .scrub {
+        width: 100%;
+        margin-top: 30px;
+      }
+      .track {
+        position: relative;
+        height: 26px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        touch-action: none;
+      }
+      .rail {
+        width: 100%;
+        height: 3px;
+        border-radius: 2px;
+        background: var(--hair);
+      }
+      .fill {
+        position: absolute;
+        left: 0;
+        height: 3px;
+        border-radius: 2px;
+        background: var(--ink);
+        width: 0%;
+      }
+      .knob {
+        position: absolute;
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: var(--ink);
+        left: 0%;
+        transform: translateX(-50%);
+        transition: transform 0.12s ease;
+      }
+      .track:hover .knob {
+        transform: translateX(-50%) scale(1.25);
+      }
+      .times {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color: var(--muted);
+        font-variant-numeric: tabular-nums;
+        margin-top: 6px;
+      }
+
+      .transport {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 34px;
+        margin-top: 22px;
+      }
+      .skip {
+        width: 52px;
+        height: 52px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        color: var(--ink);
+        transition: background 0.15s ease;
+      }
+      .skip:hover {
+        background: var(--hair2);
+      }
+      .skip:disabled {
+        color: var(--hair);
+        background: none;
+        cursor: default;
+      }
+      .playbtn {
+        width: 76px;
+        height: 76px;
+        border-radius: 50%;
+        background: var(--ink);
+        color: var(--paper);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 10px 26px -10px rgba(25, 23, 20, 0.5);
+        transition:
+          transform 0.15s ease,
+          background var(--transition-speed) ease,
+          color var(--transition-speed) ease;
+      }
+      .playbtn:active {
+        transform: scale(0.96);
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .spinner {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 2.5px solid rgba(251, 250, 248, 0.3);
+        border-top-color: var(--paper);
+        animation: spin 0.8s linear infinite;
+      }
+
+      .traits {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 30px;
+        width: 100%;
+      }
+      .trait {
+        flex: 0 1 96px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        padding: 10px 6px;
+        border-radius: 12px;
+        transition: background 0.15s ease;
+      }
+      .trait:hover {
+        background: var(--hair2);
+      }
+      .trait .val {
+        font-size: 15px;
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+      }
+      .trait .lbl {
+        font-size: 11.5px;
+        color: var(--muted);
+      }
+
+      /* change-book button */
+      .change-book-btn {
+        margin-top: 20px;
+        font-size: 13px;
+        color: var(--muted);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        transition: color 0.15s ease;
+      }
+      .change-book-btn:hover {
+        color: var(--ink);
+      }
+
+      /* ---------- right column — text reader (unconfined) ---------- */
+      .reader {
+        flex: 1;
+        min-width: 0;
+        padding-top: 10vh;
+      }
+      .chunk {
+        font-size: 20px;
+        line-height: 1.7;
+        color: var(--muted);
+        margin-bottom: 32px;
+        padding: 0;
+        cursor: pointer;
+        transition: color 0.3s ease;
+        max-width: 65ch;
+        white-space: pre-wrap;
+      }
+      .chunk:hover {
+        color: var(--ink);
+      }
+      .chunk.active {
+        color: var(--ink);
+        font-weight: 500;
+      }
+
+      /* ---------- states / overlays ---------- */
+      .loading {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        color: var(--muted);
+        font-size: 13.5px;
+      }
+      .loading .spinner {
+        border-color: var(--hair);
+        border-top-color: var(--ink);
+      }
+      .toast {
+        position: fixed;
+        left: 50%;
+        bottom: calc(26px + env(safe-area-inset-bottom));
+        transform: translateX(-50%);
+        background: var(--ink);
+        color: var(--paper);
+        font-size: 13px;
+        padding: 10px 16px;
+        border-radius: 99px;
+        box-shadow: var(--shadow);
+        max-width: 88vw;
+        text-align: center;
+        z-index: 60;
+        transition: background var(--transition-speed) ease;
+      }
+
+      .scrim {
+        position: fixed;
+        inset: 0;
+        background: rgba(25, 23, 20, 0.28);
+        z-index: 40;
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+      }
+      .sheet {
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 0;
+        width: 100%;
+        max-width: 480px;
+        z-index: 50;
+        background: var(--card);
+        border: 1px solid var(--hair);
+        border-bottom: 0;
+        border-radius: 22px 22px 0 0;
+        padding: 22px 24px calc(26px + env(safe-area-inset-bottom));
+        box-shadow: 0 -14px 50px -12px rgba(25, 23, 20, 0.25);
+        transition: background var(--transition-speed) ease;
+      }
+      .sheet h2 {
+        font-family: Fraunces, serif;
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0 0 4px;
+      }
+      .sheet p {
+        margin: 0 0 16px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .field {
+        display: flex;
+        gap: 8px;
+      }
+      .field input {
+        flex: 1;
+        min-width: 0;
+        border: 1px solid var(--hair);
+        border-radius: 10px;
+        padding: 11px 13px;
+        font-size: 14px;
+        background: var(--paper);
+        transition: background var(--transition-speed) ease;
+      }
+      .field input::placeholder {
+        color: var(--muted);
+      }
+      .savebtn {
+        background: var(--ink);
+        color: var(--paper);
+        border-radius: 10px;
+        padding: 0 18px;
+        font-weight: 500;
+        font-size: 14px;
+        transition: background var(--transition-speed) ease;
+      }
+      .sheet .fine {
+        margin-top: 12px;
+        margin-bottom: 0;
+        font-size: 12px;
+      }
+
+      /* ========== MOBILE bottom player bar ========== */
+      .mob-header {
+        display: none;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 24px;
+      }
+      .mob-cover {
+        width: 48px;
+        height: 72px;
+        flex-shrink: 0;
+        border-radius: 3px 8px 8px 3px;
+        background: var(--card);
+        border: 1px solid var(--hair);
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+      }
+      .mob-cover::before {
+        content: "";
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 5px;
+        background: var(--spine, var(--hair));
+      }
+      .mob-info {
+        min-width: 0;
+      }
+      .mob-title {
+        font-family: Fraunces, serif;
+        font-size: 15px;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 55vw;
+      }
+      .mob-sub {
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 1px;
+      }
+      .mob-change {
+        font-size: 11px;
+        color: var(--muted);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        margin-top: 3px;
+        display: block;
+      }
+
+      /* Fixed bottom bar — only on mobile */
+      .bottom-bar {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 30;
+        padding: 10px 20px calc(14px + env(safe-area-inset-bottom));
+        background: rgba(var(--paper-rgb, 251, 250, 248), 0.88);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-top: 1px solid var(--hair);
+        flex-direction: column;
+        gap: 0;
+      }
+      [data-dark] .bottom-bar {
+        background: rgba(24, 23, 26, 0.88);
+      }
+      .bb-scrub {
+        width: 100%;
+        margin-bottom: 8px;
+      }
+      .bb-scrub .track {
+        height: 20px;
+      }
+      .bb-scrub .knob {
+        width: 9px;
+        height: 9px;
+      }
+      .bb-controls {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .bb-transport {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      .bb-skip {
+        width: 40px;
+        height: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        color: var(--ink);
+        transition: background 0.15s ease;
+      }
+      .bb-skip:disabled {
+        color: var(--hair);
+        cursor: default;
+      }
+      .bb-play {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        background: var(--ink);
+        color: var(--paper);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 6px 20px -6px rgba(25, 23, 20, 0.5);
+        transition: transform 0.15s ease;
+      }
+      .bb-play:active {
+        transform: scale(0.94);
+      }
+      .bb-chips {
+        display: flex;
+        gap: 8px;
+      }
+      .bb-chip {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--muted);
+        padding: 5px 10px;
+        border-radius: 99px;
+        background: var(--hair2);
+        transition:
+          color 0.15s ease,
+          background 0.15s ease;
+        min-width: 44px;
+        text-align: center;
+      }
+      .bb-chip:hover {
+        color: var(--ink);
+      }
+      .bb-times {
+        display: flex;
+        justify-content: space-between;
+        font-size: 10px;
+        color: var(--muted);
+        font-variant-numeric: tabular-nums;
+        margin-top: 2px;
+      }
+
+      /* Narrow screens — show mobile layout */
+      @media (max-width: 800px) {
+        .shell {
+          max-width: 100%;
+          padding-bottom: calc(120px + env(safe-area-inset-bottom));
+        }
+        .player {
+          display: block;
+          padding-bottom: 0;
+        }
+        .player-left {
+          display: none;
+        } /* hidden — replaced by mob-header + bottom-bar */
+        .reader {
+          padding-top: 0;
+        }
+        .mob-header {
+          display: flex;
+        }
+        .bottom-bar {
+          display: flex;
+        }
+        .chunk {
+          font-size: 17px;
+          max-width: 100%;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+        }
+        .spinner {
+          animation-duration: 1.2s !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- Load external configuration -->
+    <script src="./config.js"></script>
+
+    <script>
+      "use strict";
+      (function guard() {
+        const missing = [];
+        if (!window.React || !window.ReactDOM) missing.push("React");
+        if (!window.pdfjsLib) missing.push("the PDF reader");
+        if (!window.JSZip) missing.push("the EPUB reader");
+        if (missing.length) {
+          document.getElementById("root").innerHTML =
+            '<div style="min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:32px;text-align:center;color:#191714">' +
+            '<div style="max-width:320px"><div style="font-family:Fraunces,serif;font-size:20px;font-weight:600;margin-bottom:8px">Couldn\u2019t load ' +
+            missing.join(", ") +
+            "</div>" +
+            '<div style="font-size:14px;color:#8B857B;line-height:1.5">Softcover needs an internet connection the first time it opens. Check your connection and refresh.</div></div></div>';
+          throw new Error("Softcover: missing " + missing.join(", "));
+        }
+      })();
+      const { useState, useRef, useEffect, useCallback } = React;
+      const html = htm.bind(React.createElement);
+      if (window.pdfjsLib) {
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+          "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+      }
+
+      /* ============================== icons (lucide paths) ============================== */
+      const Icon = (p) =>
+        html`<svg
+          width=${p.size || 22}
+          height=${p.size || 22}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          ${p.children}
+        </svg>`;
+      const IPlay = () =>
+        html`<svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          aria-hidden="true"
+          style=${{ marginLeft: "3px" }}
+        >
+          <path
+            d="M6 4.5v15a1 1 0 0 0 1.52.86l12.2-7.5a1 1 0 0 0 0-1.72L7.52 3.64A1 1 0 0 0 6 4.5z"
+          />
+        </svg>`;
+      const IPause = () =>
+        html`<svg
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <rect x="6" y="4" width="4" height="16" rx="1.2" />
+          <rect x="14" y="4" width="4" height="16" rx="1.2" />
+        </svg>`;
+      const IBack = () =>
+        html`<${Icon} size=${24}
+          ><path d="M3 4v6h6" /><path d="M3.5 13a9 9 0 1 0 2.1-5.4L3 10"
+        /><//>`;
+      const IFwd = () =>
+        html`<${Icon} size=${24}
+          ><path d="M21 4v6h-6" /><path d="M20.5 13a9 9 0 1 1-2.1-5.4L21 10"
+        /><//>`;
+      const IGear = () =>
+        html`<${Icon} size=${20}
+          ><circle cx="12" cy="12" r="3" /><path
+            d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+        /><//>`;
+      const IBook = () =>
+        html`<${Icon} size=${30}
+          ><path
+            d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4a2 2 0 0 0-2-2H6.5A2.5 2.5 0 0 0 4 4.5z" /><path
+            d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"
+        /><//>`;
+      const IMoon = () =>
+        html`<${Icon} size=${20}
+          ><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+        /><//>`;
+      const ISun = () =>
+        html`<${Icon} size=${20}
+          ><circle cx="12" cy="12" r="5" /><path
+            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+        /><//>`;
+
+      /* ============================== text extraction ============================== */
+      async function extractPdf(file) {
+        const pdf = await pdfjsLib.getDocument({
+          data: await file.arrayBuffer(),
+        }).promise;
+        let out = [];
+        for (let p = 1; p <= pdf.numPages; p++) {
+          const page = await pdf.getPage(p);
+          const tc = await page.getTextContent();
+          let line = tc.items.map((it) => it.str).join(" ");
+          line = line.replace(/-\s+(?=[a-z])/g, "");
+          if (!/^\s*\d+\s*$/.test(line)) out.push(line);
+        }
+        return {
+          title: file.name.replace(/\.[^.]+$/, ""),
+          text: out.join("\n"),
+        };
+      }
+
+      async function extractEpub(file) {
+        const zip = await JSZip.loadAsync(file);
+        const containerXml = await zip
+          .file("META-INF/container.xml")
+          .async("string");
+        const container = new DOMParser().parseFromString(
+          containerXml,
+          "application/xml",
+        );
+        const opfPath = container
+          .querySelector("rootfile")
+          .getAttribute("full-path");
+        const opfDir = opfPath.includes("/")
+          ? opfPath.slice(0, opfPath.lastIndexOf("/") + 1)
+          : "";
+        const opf = new DOMParser().parseFromString(
+          await zip.file(opfPath).async("string"),
+          "application/xml",
+        );
+
+        const dcTitle = opf.getElementsByTagNameNS(
+          "http://purl.org/dc/elements/1.1/",
+          "title",
+        )[0];
+        const title =
+          (dcTitle && dcTitle.textContent.trim()) ||
+          file.name.replace(/\.[^.]+$/, "");
+
+        const manifest = {};
+        opf.querySelectorAll("manifest > item").forEach((it) => {
+          manifest[it.getAttribute("id")] = {
+            href: it.getAttribute("href"),
+            type: it.getAttribute("media-type") || "",
+          };
+        });
+        const spine = Array.from(opf.querySelectorAll("spine > itemref"))
+          .map((r) => manifest[r.getAttribute("idref")])
+          .filter((m) => m && /html|xml/i.test(m.type));
+
+        let text = "";
+        for (const m of spine) {
+          const f =
+            zip.file(decodeURIComponent(opfDir + m.href)) ||
+            zip.file(decodeURIComponent(m.href));
+          if (!f) continue;
+          const doc = new DOMParser().parseFromString(
+            await f.async("string"),
+            "text/html",
+          );
+          doc
+            .querySelectorAll("script,style,nav,header,footer")
+            .forEach((n) => n.remove());
+          // Inject newlines for block elements so paragraphs and chapters are distinct
+          doc
+            .querySelectorAll("p, div, h1, h2, h3, h4, h5, h6, li, blockquote")
+            .forEach((n) => {
+              n.prepend(doc.createTextNode("\n\n"));
+            });
+          const body = doc.body ? doc.body.textContent : "";
+          text += "\n\n" + body;
+        }
+        return { title, text };
+      }
+
+      function cleanText(t) {
+        // Remove watermarks
+        t = t.replace(/oceanofpdf\.com/gi, "");
+        // Remove ad-hoc hyphenation across line breaks
+        t = t.replace(/-\s*\n\s*/g, "");
+        // Normalize spaces
+        t = t.replace(/[ \t]+/g, " ");
+        // Normalize newlines (more than 2 becomes exactly 2)
+        t = t.replace(/\n\s*\n\s*/g, "\n\n");
+        return t.trim();
+      }
+
+      /* Split long paragraphs by sentences into an accumulator array */
+      function _splitBySentences(text, target, out) {
+        const sents = text
+          .split(/(?<=[.!?…"])(\s+)/)
+          .filter((s) => s.trim().length);
+        let cur = "";
+        for (let s of sents) {
+          while (s.length > target * 1.8) {
+            out.push(s.slice(0, target));
+            s = s.slice(target);
+          }
+          if ((cur + " " + s).length > target && cur) {
+            out.push(cur.trim());
+            cur = s;
+          } else cur = cur ? cur + " " + s : s;
+        }
+        if (cur.trim()) out.push(cur.trim());
+      }
+
+      function chunkText(text, target = 1200) {
+        // Each double-newline separated paragraph becomes its own chunk.
+        // Short "header" paragraphs (< 80 chars) are attached to the paragraph that follows them.
+        const paragraphs = text
+          .split(/\n\n+/)
+          .map((p) => p.trim())
+          .filter((p) => p.length > 0);
+        const chunks = [];
+        let header = ""; // pending short header line
+
+        for (const p of paragraphs) {
+          if (p.length < 80) {
+            // Short line — treat as section header, prepend to next paragraph
+            header = header ? header + "\n" + p : p;
+            continue;
+          }
+          const full = header ? header + "\n\n" + p : p;
+          header = "";
+          if (full.length > target * 1.8) {
+            _splitBySentences(full, target, chunks);
+          } else {
+            chunks.push(full);
+          }
+        }
+        if (header) chunks.push(header);
+        return chunks;
+      }
+
+      /* ============================== Gemini TTS ============================== */
+      const VOICES = ["Kore", "Zephyr", "Puck", "Charon", "Aoede", "Leda"];
+      const TTS_URL = (key) =>
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${encodeURIComponent(key)}`;
+
+      /*
+  Rate-limit strategy:
+  - Only ONE request in-flight at a time (serial queue).
+  - Before every request, check the global cooldown timer.
+  - On 429: set a 60-second cooldown, throw IMMEDIATELY (no retry loop).
+  - The caller (engine) shows a toast. User taps Play again after the cooldown.
+  - Next request automatically waits for the cooldown before attempting.
+  This means a 429 produces exactly ONE console error, not a stream of them.
+*/
+      let _rateCooledDownAt = 0;
+      let _ttsQueue = Promise.resolve();
+
+      function enqueueTts(fn) {
+        const wrapped = async () => {
+          // Reject immediately if we are in a cooldown, so the UI doesn't hang with a spinner
+          const wait = _rateCooledDownAt - Date.now();
+          if (wait > 0) throw new Error("RATE");
+          return fn();
+        };
+        const next = _ttsQueue.then(wrapped, wrapped);
+        _ttsQueue = next.then(
+          () => {},
+          () => {},
+        );
+        return next;
+      }
+
+      async function fetchSpeech(ctx, apiKey, voice, text) {
+        const body = {
+          contents: [{ parts: [{ text }] }],
+          generationConfig: {
+            responseModalities: ["AUDIO"],
+            speechConfig: {
+              voiceConfig: { prebuiltVoiceConfig: { voiceName: voice } },
+            },
+          },
+        };
+
+        // Single attempt — no retry loop
+        const res = await fetch(TTS_URL(apiKey), {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        });
+
+        if (!res.ok) {
+          let apiMsg = "";
+          try {
+            const errData = await res.json();
+            apiMsg = (errData && errData.error && errData.error.message) || "";
+            apiMsg = apiMsg
+              .replace(/api_key:[A-Za-z0-9_-]+/g, "api_key")
+              .slice(0, 160);
+          } catch (e) {}
+          if (res.status === 429) {
+            // Set a 60-second global cooldown so nothing else fires during this window
+            const retryAfter = res.headers.get("Retry-After");
+            const cooldown = retryAfter ? parseFloat(retryAfter) * 1000 : 60000;
+            _rateCooledDownAt = Date.now() + cooldown;
+            const err = new Error("RATE");
+            err.detail = apiMsg;
+            throw err;
+          }
+          if (res.status === 400 || res.status === 403) {
+            const err = new Error("KEY");
+            err.detail = apiMsg;
+            throw err;
+          }
+          const err = new Error("HTTP " + res.status);
+          err.detail = apiMsg;
+          throw err;
+        }
+
+        const data = await res.json();
+        const parts =
+          (((data.candidates || [])[0] || {}).content || {}).parts || [];
+        const inline = parts.find((p) => p.inlineData);
+        if (!inline) throw new Error("NOAUDIO");
+        const rateMatch = /rate=(\d+)/.exec(inline.inlineData.mimeType || "");
+        const rate = rateMatch ? +rateMatch[1] : 24000;
+
+        const bin = atob(inline.inlineData.data);
+        const bytes = new Uint8Array(bin.length);
+        for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+        const pcm = new Int16Array(
+          bytes.buffer,
+          0,
+          Math.floor(bytes.length / 2),
+        );
+        const buf = ctx.createBuffer(1, pcm.length, rate);
+        const ch = buf.getChannelData(0);
+        for (let i = 0; i < pcm.length; i++) ch[i] = pcm[i] / 32768;
+        return buf;
+      }
+
+      /* ============================== ambient sound (synthesized) ============================== */
+      const AMBIENTS = ["Off", "Rain", "Fire", "Deep"];
+      function makeNoiseBuffer(ctx, seconds, brown) {
+        const len = Math.floor(ctx.sampleRate * seconds);
+        const buf = ctx.createBuffer(1, len, ctx.sampleRate);
+        const d = buf.getChannelData(0);
+        let last = 0;
+        for (let i = 0; i < len; i++) {
+          const w = Math.random() * 2 - 1;
+          if (brown) {
+            last = (last + 0.02 * w) / 1.02;
+            d[i] = last * 3.5;
+          } else d[i] = w;
+        }
+        return buf;
+      }
+
+      /* ============================== playback engine ============================== */
+      function createEngine(notify) {
+        const E = {
+          ctx: null,
+          master: null,
+          ambientGain: null,
+          ambientNodes: [],
+          crackleTimer: null,
+          apiKey: "",
+          voice: VOICES[0],
+          rate: 1,
+          chunks: [],
+          // Per-voice buffer cache: Map<voice, Map<chunkIdx, AudioBuffer>>
+          voiceBuffers: new Map(),
+          pending: new Map(), // key: `${voice}:${idx}`
+          idx: 0,
+          offset: 0,
+          startedAt: 0,
+          playing: false,
+          fetching: false,
+          src: null,
+          token: 0,
+        };
+
+        function ensureCtx() {
+          if (!E.ctx) {
+            E.ctx = new (window.AudioContext || window.webkitAudioContext)();
+            E.master = E.ctx.createGain();
+            E.master.connect(E.ctx.destination);
+            E.ambientGain = E.ctx.createGain();
+            E.ambientGain.gain.value = 0;
+            E.ambientGain.connect(E.ctx.destination);
+          }
+          if (E.ctx.state === "suspended") E.ctx.resume();
+        }
+
+        function voiceCache(voice) {
+          if (!E.voiceBuffers.has(voice)) E.voiceBuffers.set(voice, new Map());
+          return E.voiceBuffers.get(voice);
+        }
+
+        function getBuffer(voice, i) {
+          const cache = voiceCache(voice);
+          if (cache.has(i)) return Promise.resolve(cache.get(i));
+          const key = `${voice}:${i}`;
+          if (E.pending.has(key)) return E.pending.get(key);
+          // Route through the serial queue — one request at a time
+          const p = enqueueTts(() =>
+            fetchSpeech(E.ctx, E.apiKey, voice, E.chunks[i]),
+          )
+            .then((b) => {
+              cache.set(i, b);
+              E.pending.delete(key);
+              return b;
+            })
+            .catch((err) => {
+              E.pending.delete(key);
+              throw err;
+            });
+          E.pending.set(key, p);
+          return p;
+        }
+
+        function stopSrc() {
+          if (E.src) {
+            E.src.onended = null;
+            try {
+              E.src.stop();
+            } catch (e) {}
+            E.src = null;
+          }
+        }
+
+        async function playAt(i, offset) {
+          ensureCtx();
+          E.idx = i;
+          E.offset = offset;
+          E.playing = true;
+          const myToken = ++E.token;
+          const myVoice = E.voice;
+          stopSrc();
+          notify();
+          const cache = voiceCache(myVoice);
+          if (!cache.has(i)) {
+            E.fetching = true;
+            notify();
+          }
+          let buf;
+          try {
+            buf = await getBuffer(myVoice, i);
+          } catch (err) {
+            if (myToken !== E.token) return;
+            E.playing = false;
+            E.fetching = false;
+            if (err && err.message === "KEY") notify("key", err.detail);
+            else if (err && err.message === "RATE") notify("rate", err.detail);
+            else notify("err", err && err.detail);
+            return;
+          }
+          E.fetching = false;
+          if (myToken !== E.token || !E.playing || E.voice !== myVoice) {
+            notify();
+            return;
+          }
+
+          const src = E.ctx.createBufferSource();
+          src.buffer = buf;
+          src.playbackRate.value = E.rate;
+          src.connect(E.master);
+          const safeOffset = Math.min(offset, Math.max(0, buf.duration - 0.05));
+          src.start(0, safeOffset);
+          E.src = src;
+          E.startedAt = E.ctx.currentTime;
+          E.offset = safeOffset;
+          src.onended = () => {
+            if (myToken !== E.token) return;
+            if (E.idx + 1 < E.chunks.length) playAt(E.idx + 1, 0);
+            else {
+              E.playing = false;
+              E.offset = 0;
+              notify();
+            }
+          };
+          notify();
+          // NO pre-fetch — only request what's needed right now.
+          // Pre-fetching was causing rapid back-to-back requests that triggered 429s.
+        }
+
+        return {
+          E,
+          load(chunks) {
+            E.chunks = chunks;
+            E.voiceBuffers = new Map();
+            E.pending = new Map();
+            E.idx = 0;
+            E.offset = 0;
+            E.playing = false;
+            ++E.token;
+          },
+          play() {
+            playAt(E.idx, E.offset);
+          },
+          pause() {
+            if (!E.playing) return;
+            if (E.src)
+              E.offset = E.offset + (E.ctx.currentTime - E.startedAt) * E.rate;
+            E.playing = false;
+            ++E.token;
+            stopSrc();
+            notify();
+          },
+          toggle() {
+            E.playing ? this.pause() : this.play();
+          },
+          skip(d) {
+            const i = Math.max(0, Math.min(E.chunks.length - 1, E.idx + d));
+            if (E.playing) playAt(i, 0);
+            else {
+              E.idx = i;
+              E.offset = 0;
+              notify();
+            }
+          },
+          seek(i) {
+            this.skip(i - E.idx);
+          },
+          seekToChunk(i) {
+            const idx = Math.max(0, Math.min(E.chunks.length - 1, i));
+            playAt(idx, 0);
+          },
+          setRate(r) {
+            E.rate = r;
+            if (E.playing && E.src) {
+              E.offset =
+                E.offset +
+                (E.ctx.currentTime - E.startedAt) * E.src.playbackRate.value;
+              E.startedAt = E.ctx.currentTime;
+              E.src.playbackRate.value = r;
+            }
+            notify();
+          },
+          setVoice(v) {
+            const wasPlaying = E.playing;
+            E.voice = v;
+            // Don't clear other voice caches — just switch voice
+            if (E.pending.has(`${v}:${E.idx}`)) {
+              // Already fetching for this voice — wait
+            }
+            if (wasPlaying) playAt(E.idx, E.offset);
+            else {
+              E.offset = E.offset;
+              notify();
+            }
+          },
+          position() {
+            const played =
+              E.playing && E.src
+                ? E.offset + (E.ctx.currentTime - E.startedAt) * E.rate
+                : E.offset;
+            const cache = voiceCache(E.voice);
+            const buf = cache.get(E.idx);
+            return { played, dur: buf ? buf.duration : null };
+          },
+          setAmbient(kind) {
+            ensureCtx();
+            E.ambientNodes.forEach((n) => {
+              try {
+                n.stop();
+              } catch (e) {}
+            });
+            E.ambientNodes = [];
+            if (E.crackleTimer) {
+              clearInterval(E.crackleTimer);
+              E.crackleTimer = null;
+            }
+            if (kind === "Off") {
+              E.ambientGain.gain.value = 0;
+              return;
+            }
+
+            const g = E.ambientGain;
+            const start = (node) => {
+              node.start();
+              E.ambientNodes.push(node);
+            };
+
+            if (kind === "Rain") {
+              const src = E.ctx.createBufferSource();
+              src.buffer = makeNoiseBuffer(E.ctx, 4, false);
+              src.loop = true;
+              const hp = E.ctx.createBiquadFilter();
+              hp.type = "highpass";
+              hp.frequency.value = 350;
+              const lp = E.ctx.createBiquadFilter();
+              lp.type = "lowpass";
+              lp.frequency.value = 1600;
+              src.connect(hp);
+              hp.connect(lp);
+              lp.connect(g);
+              g.gain.value = 0.1;
+              start(src);
+            } else if (kind === "Deep") {
+              const src = E.ctx.createBufferSource();
+              src.buffer = makeNoiseBuffer(E.ctx, 4, true);
+              src.loop = true;
+              const lp = E.ctx.createBiquadFilter();
+              lp.type = "lowpass";
+              lp.frequency.value = 400;
+              src.connect(lp);
+              lp.connect(g);
+              g.gain.value = 0.14;
+              start(src);
+            } else if (kind === "Fire") {
+              const src = E.ctx.createBufferSource();
+              src.buffer = makeNoiseBuffer(E.ctx, 4, true);
+              src.loop = true;
+              const lp = E.ctx.createBiquadFilter();
+              lp.type = "lowpass";
+              lp.frequency.value = 300;
+              src.connect(lp);
+              lp.connect(g);
+              g.gain.value = 0.12;
+              start(src);
+              E.crackleTimer = setInterval(() => {
+                if (!E.ctx || Math.random() < 0.35) return;
+                const c = E.ctx.createBufferSource();
+                c.buffer = makeNoiseBuffer(E.ctx, 0.04, false);
+                const bp = E.ctx.createBiquadFilter();
+                bp.type = "bandpass";
+                bp.frequency.value = 1800 + Math.random() * 2200;
+                bp.Q.value = 1.5;
+                const cg = E.ctx.createGain();
+                cg.gain.value = 0.05 + Math.random() * 0.07;
+                c.connect(bp);
+                bp.connect(cg);
+                cg.connect(E.ctx.destination);
+                c.start();
+              }, 240);
+            }
+          },
+        };
+      }
+
+      /* ============================== helpers ============================== */
+      function fmt(sec) {
+        if (sec == null || isNaN(sec)) return "–:––";
+        sec = Math.max(0, Math.floor(sec));
+        return Math.floor(sec / 60) + ":" + String(sec % 60).padStart(2, "0");
+      }
+      function estLength(chars, idx = 0, chunks = []) {
+        const charsLeft = chunks.length
+          ? chunks.slice(idx).reduce((a, c) => a + c.length, 0)
+          : chars;
+        const m = Math.round(charsLeft / 900);
+        if (!chunks.length) {
+          if (m < 60) return `about ${Math.max(1, m)} min of listening`;
+          return `about ${Math.floor(m / 60)} h ${m % 60} min of listening`;
+        }
+        if (m < 60) return `${Math.max(1, m)} min left`;
+        return `${Math.floor(m / 60)} h ${m % 60} min left`;
+      }
+      function spineColor(name) {
+        // A sleek, neutral charcoal/dark-grey spine
+        return `#222222`;
+      }
+      /* Repair pasted keys: strip whitespace/quotes and extract the AIza… token if present */
+      function sanitizeKey(k) {
+        k = (k || "").trim();
+        const m = /AIza[0-9A-Za-z_-]{35}/.exec(k);
+        return m ? m[0] : k;
+      }
+      const store = {
+        get(k) {
+          try {
+            return localStorage.getItem(k);
+          } catch (e) {
+            return null;
+          }
+        },
+        set(k, v) {
+          try {
+            localStorage.setItem(k, v);
+          } catch (e) {}
+        },
+        getProgress(title) {
+          try {
+            return (
+              JSON.parse(localStorage.getItem("softcover.progress." + title)) ||
+              {}
+            );
+          } catch (e) {
+            return {};
+          }
+        },
+        setProgress(title, idx) {
+          try {
+            localStorage.setItem(
+              "softcover.progress." + title,
+              JSON.stringify({ idx, ts: Date.now() }),
+            );
+          } catch (e) {}
+        },
+      };
+
+      /* ============================== IndexedDB book persistence ============================== */
+      const bookDB = (() => {
+        let _db = null;
+        const open = () =>
+          _db
+            ? Promise.resolve(_db)
+            : new Promise((res, rej) => {
+                const req = indexedDB.open("softcover-books", 1);
+                req.onupgradeneeded = (e) =>
+                  e.target.result.createObjectStore("books");
+                req.onsuccess = (e) => {
+                  _db = e.target.result;
+                  res(_db);
+                };
+                req.onerror = rej;
+              });
+        return {
+          async get(key) {
+            const db = await open();
+            return new Promise((r, j) => {
+              const q = db.transaction("books").objectStore("books").get(key);
+              q.onsuccess = () => r(q.result);
+              q.onerror = j;
+            });
+          },
+          async set(key, val) {
+            const db = await open();
+            return new Promise((r, j) => {
+              const tx = db.transaction("books", "readwrite");
+              tx.objectStore("books").put(val, key);
+              tx.oncomplete = r;
+              tx.onerror = j;
+            });
+          },
+          async del(key) {
+            const db = await open();
+            return new Promise((r, j) => {
+              const tx = db.transaction("books", "readwrite");
+              tx.objectStore("books").delete(key);
+              tx.oncomplete = r;
+              tx.onerror = j;
+            });
+          },
+        };
+      })();
+
+      /* ============================== cover art (Google Books) ============================== */
+      async function fetchCover(title) {
+        // 1. Try OpenLibrary first — very generous rate limits, no API key needed
+        try {
+          const q = encodeURIComponent(title);
+          const res = await fetch(
+            `https://openlibrary.org/search.json?title=${q}&limit=1&fields=cover_i`,
+          );
+          if (res.ok) {
+            const data = await res.json();
+            const coverId = data?.docs?.[0]?.cover_i;
+            if (coverId)
+              return `https://covers.openlibrary.org/b/id/${coverId}-L.jpg`;
+          }
+        } catch (e) {}
+
+        // 2. Fallback to Google Books (can 429 if hammered)
+        try {
+          const q = encodeURIComponent("intitle:" + title);
+          const res = await fetch(
+            `https://www.googleapis.com/books/v1/volumes?q=${q}&maxResults=1&fields=items/volumeInfo/imageLinks`,
+          );
+          if (res.ok) {
+            const data = await res.json();
+            const img = data?.items?.[0]?.volumeInfo?.imageLinks;
+            if (img) {
+              const url =
+                img.extraLarge || img.large || img.medium || img.thumbnail;
+              if (url)
+                return url
+                  .replace("http://", "https://")
+                  .replace("zoom=1", "zoom=3");
+            }
+          }
+        } catch (e) {}
+
+        return null;
+      }
+
+      /* ============================== app ============================== */
+      function App() {
+        const [screen, setScreen] = useState("empty");
+        const [book, setBook] = useState(null);
+        const [apiKey, setApiKey] = useState(
+          sanitizeKey(
+            (window.ENV && window.ENV.GEMINI_API_KEY) ||
+              store.get("softcover.key") ||
+              "",
+          ),
+        );
+        const [voice, setVoice] = useState(
+          store.get("softcover.voice") || VOICES[0],
+        );
+        const [rateI, setRateI] = useState(1);
+        const [ambient, setAmbient] = useState("Off");
+        const [settings, setSettings] = useState(false);
+        const [dark, setDark] = useState(() => {
+          const saved = store.get("softcover.dark");
+          if (saved) return saved === "1";
+          const hour = new Date().getHours();
+          return hour >= 18 || hour < 6;
+        });
+        const [toast, setToast] = useState("");
+        const [tick, setTick] = useState(0);
+        const [armed, setArmed] = useState(false);
+
+        // Restore book from IndexedDB on first mount
+        useEffect(() => {
+          bookDB
+            .get("current")
+            .then(async (saved) => {
+              if (!saved) return;
+              const { title, text, coverUrl } = saved;
+              const chunks = chunkText(text);
+              eng.load(chunks);
+              const progress = store.getProgress(title);
+              if (progress?.idx && progress.idx < chunks.length)
+                eng.E.idx = progress.idx;
+              const spine = spineColor(title);
+              setBook({
+                title,
+                chunks,
+                chars: text.length,
+                spine,
+                coverUrl: coverUrl || null,
+              });
+              setScreen("player");
+
+              // Only fetch if we don't already have it cached
+              if (!coverUrl) {
+                const fetched = await fetchCover(title);
+                if (fetched) {
+                  setBook((b) => (b ? { ...b, coverUrl: fetched } : b));
+                  bookDB
+                    .set("current", { ...saved, coverUrl: fetched })
+                    .catch(() => {});
+                }
+              }
+            })
+            .catch(() => {});
+        }, []);
+
+        const RATES = [0.85, 1, 1.15, 1.3];
+        const fileRef = useRef(null);
+        const fillRef = useRef(null);
+        const knobRef = useRef(null);
+        const tLeft = useRef(null);
+        const tRight = useRef(null);
+        const engineRef = useRef(null);
+        const toastTimer = useRef(null);
+
+        // Apply dark mode to document root
+        useEffect(() => {
+          if (dark) document.documentElement.setAttribute("data-dark", "");
+          else document.documentElement.removeAttribute("data-dark");
+          store.set("softcover.dark", dark ? "1" : "0");
+        }, [dark]);
+
+        const say = useCallback((msg) => {
+          setToast(msg);
+          clearTimeout(toastTimer.current);
+          toastTimer.current = setTimeout(() => setToast(""), 4200);
+        }, []);
+
+        if (!engineRef.current) {
+          engineRef.current = createEngine((flag, detail) => {
+            if (flag === "key") {
+              say(
+                detail
+                  ? "Gemini rejected the key: " + detail
+                  : "That API key didn't work — check Settings.",
+              );
+              setSettings(true);
+            } else if (flag === "rate") {
+              say(
+                detail
+                  ? "Rate limited: " + detail
+                  : "Gemini rate limit hit — wait about 60 seconds, then press Play again.",
+              );
+            } else if (flag === "err") {
+              say(
+                detail
+                  ? "Gemini error: " + detail
+                  : "Couldn't reach Gemini. Check your connection and try again.",
+              );
+            }
+            setTick((t) => t + 1);
+          });
+        }
+        const eng = engineRef.current;
+        eng.E.apiKey = apiKey;
+
+        // Save progress whenever chunk index changes
+        useEffect(() => {
+          if (book && eng.E.idx != null) {
+            store.setProgress(book.title, eng.E.idx);
+          }
+        }, [tick, book]);
+
+        /* progress painter — updates both desktop + mobile bar simultaneously */
+        useEffect(() => {
+          let raf;
+          const paint = () => {
+            const E = eng.E;
+            if (screen === "player" && E.chunks.length) {
+              const { played, dur } = eng.position();
+              const within = dur ? Math.min(1, played / dur) : 0;
+              const pct = ((E.idx + within) / E.chunks.length) * 100;
+              const pctStr = pct + "%";
+              const timeStr = fmt(played);
+              const partStr = `Part ${E.idx + 1} of ${E.chunks.length}`;
+              // Update every .fill and .knob on the page (desktop + mobile bar)
+              document
+                .querySelectorAll(".fill")
+                .forEach((el) => (el.style.width = pctStr));
+              document
+                .querySelectorAll(".knob")
+                .forEach((el) => (el.style.left = pctStr));
+              // tLeft / tRight refs cover desktop; also update mobile bar by class
+              if (tLeft.current) tLeft.current.textContent = timeStr;
+              if (tRight.current) tRight.current.textContent = partStr;
+              document
+                .querySelectorAll(".bb-times span:first-child")
+                .forEach((el) => (el.textContent = timeStr));
+              document
+                .querySelectorAll(".bb-times span:last-child")
+                .forEach((el) => (el.textContent = partStr));
+
+              // Update time remaining text smoothly
+              if (book) {
+                const timeLeftStr = estLength(book.chars, E.idx, E.chunks);
+                document.querySelectorAll(".bsub, .mob-sub").forEach((el) => {
+                  if (el.textContent !== timeLeftStr)
+                    el.textContent = timeLeftStr;
+                });
+              }
+
+              // Update active chunk highlighting and auto-scroll (avoids heavy React re-renders)
+              if (window._lastIdx !== E.idx) {
+                document
+                  .querySelectorAll(".chunk.active")
+                  .forEach((el) => el.classList.remove("active"));
+                const chunks = document.querySelectorAll(".chunk");
+                if (chunks[E.idx]) {
+                  chunks[E.idx].classList.add("active");
+                  chunks[E.idx].scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                  });
+                }
+                window._lastIdx = E.idx;
+              }
+            }
+            raf = requestAnimationFrame(paint);
+          };
+          raf = requestAnimationFrame(paint);
+          return () => cancelAnimationFrame(raf);
+        }, [screen, book]);
+
+        /* keyboard */
+        useEffect(() => {
+          const onKey = (e) => {
+            if (screen !== "player" || e.target.tagName === "INPUT") return;
+            if (e.code === "Space") {
+              e.preventDefault();
+              eng.toggle();
+            }
+            if (e.code === "ArrowLeft") eng.skip(-1);
+            if (e.code === "ArrowRight") eng.skip(1);
+          };
+          window.addEventListener("keydown", onKey);
+          return () => window.removeEventListener("keydown", onKey);
+        }, [screen]);
+
+        /* media session (lock-screen controls) */
+        useEffect(() => {
+          if (!("mediaSession" in navigator) || !book) return;
+          navigator.mediaSession.metadata = new MediaMetadata({
+            title: book.title,
+            artist: "Softcover",
+          });
+          navigator.mediaSession.setActionHandler("play", () => eng.play());
+          navigator.mediaSession.setActionHandler("pause", () => eng.pause());
+          navigator.mediaSession.setActionHandler("previoustrack", () =>
+            eng.skip(-1),
+          );
+          navigator.mediaSession.setActionHandler("nexttrack", () =>
+            eng.skip(1),
+          );
+        }, [book]);
+
+        async function handleFile(file) {
+          if (!file) return;
+          const name = file.name.toLowerCase();
+          const isPdf = name.endsWith(".pdf"),
+            isEpub = name.endsWith(".epub"),
+            isTxt = name.endsWith(".txt");
+          if (!isPdf && !isEpub && !isTxt) {
+            say("PDF or EPUB, please.");
+            return;
+          }
+          setScreen("loading");
+          try {
+            let r;
+            if (isPdf) r = await extractPdf(file);
+            else if (isEpub) r = await extractEpub(file);
+            else
+              r = {
+                title: file.name.replace(/\.[^.]+$/, ""),
+                text: await file.text(),
+              };
+            const text = cleanText(r.text);
+            if (text.length < 200) throw new Error("EMPTY");
+            const chunks = chunkText(text);
+            eng.load(chunks);
+
+            // Restore saved progress
+            const saved = store.getProgress(r.title);
+            if (saved && saved.idx && saved.idx < chunks.length) {
+              eng.E.idx = saved.idx;
+              say(`Resuming from part ${saved.idx + 1}`);
+            }
+
+            // Persist book text so it survives refresh
+            bookDB.set("current", { title: r.title, text }).catch(() => {});
+
+            const spine = spineColor(r.title);
+            setBook({
+              title: r.title,
+              chunks,
+              chars: text.length,
+              spine,
+              coverUrl: null,
+            });
+            setScreen("player");
+            // Only open settings if there's genuinely no key at all
+            if (!apiKey) {
+              setSettings(true);
+            }
+
+            // Fetch cover art in background
+            fetchCover(r.title).then((coverUrl) => {
+              if (coverUrl) {
+                setBook((b) => (b ? { ...b, coverUrl } : b));
+                bookDB.get("current").then((data) => {
+                  if (data)
+                    bookDB
+                      .set("current", { ...data, coverUrl })
+                      .catch(() => {});
+                });
+              }
+            });
+          } catch (err) {
+            setScreen("empty");
+            say(
+              err && err.message === "EMPTY"
+                ? "No readable text in that file — it may be a scanned book."
+                : "Couldn't open that file. Try another copy?",
+            );
+          }
+        }
+
+        function onSeek(e) {
+          const rect = e.currentTarget.getBoundingClientRect();
+          const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+          const frac = Math.min(1, Math.max(0, x / rect.width));
+          eng.seek(
+            Math.min(
+              eng.E.chunks.length - 1,
+              Math.floor(frac * eng.E.chunks.length),
+            ),
+          );
+        }
+
+        function cycleRate() {
+          const i = (rateI + 1) % RATES.length;
+          setRateI(i);
+          eng.setRate(RATES[i]);
+        }
+        function cycleVoice() {
+          const i = (VOICES.indexOf(voice) + 1) % VOICES.length;
+          const v = VOICES[i];
+          setVoice(v);
+          store.set("softcover.voice", v);
+          eng.setVoice(v);
+          say(`Voice: ${v}`);
+        }
+        function cycleAmbient() {
+          const i = (AMBIENTS.indexOf(ambient) + 1) % AMBIENTS.length;
+          const a = AMBIENTS[i];
+          setAmbient(a);
+          eng.setAmbient(a);
+        }
+        function closeBook() {
+          eng.pause();
+          eng.setAmbient("Off");
+          setAmbient("Off");
+          setBook(null);
+          setScreen("empty");
+          bookDB.del("current").catch(() => {});
+          if (fileRef.current) fileRef.current.value = "";
+        }
+        function saveKey(v) {
+          const k = sanitizeKey(v);
+          setApiKey(k);
+          store.set("softcover.key", k);
+          setSettings(false);
+          say("Key saved — you're set.");
+        }
+
+        const E = eng.E;
+        const busy = E.fetching;
+
+        /* ------------ views ------------ */
+        const Empty = () =>
+          html` <div
+            className="empty"
+            onDragOver=${(e) => {
+              e.preventDefault();
+              setArmed(true);
+            }}
+            onDragLeave=${() => setArmed(false)}
+            onDrop=${(e) => {
+              e.preventDefault();
+              setArmed(false);
+              handleFile(e.dataTransfer.files[0]);
+            }}
+          >
+            <button
+              className=${"drop" + (armed ? " armed" : "")}
+              onClick=${() => fileRef.current.click()}
+              aria-label="Choose a PDF or EPUB"
+            >
+              <${IBook} />
+              <div className="dtitle">Drop in a book</div>
+              <div className="dsub">PDF, EPUB or TXT · or tap to browse</div>
+            </button>
+            <p className="hint">
+              Softcover reads it aloud with <b>Gemini</b> while you work.
+            </p>
+            <input
+              ref=${fileRef}
+              type="file"
+              accept=".pdf,.epub,.txt"
+              hidden
+              onChange=${(e) => handleFile(e.target.files[0])}
+            />
+          </div>`;
+
+        const Loading = () =>
+          html` <div className="loading">
+            <div className="spinner"></div>
+            <div>Opening your book…</div>
+          </div>`;
+
+        const Player = () =>
+          html` <div className="player">
+              <!-- Mobile header: mini cover + title above the text (hidden on desktop) -->
+              <div className="mob-header">
+                <div className="mob-cover" style=${{ "--spine": book.spine }}>
+                  ${book.coverUrl &&
+                  html`<img
+                    src=${book.coverUrl}
+                    alt=${book.title}
+                    className="mob-cover-img"
+                  />`}
+                </div>
+                <div className="mob-info">
+                  <div className="mob-title">${book.title}</div>
+                  <div className="mob-sub">${estLength(book.chars)}</div>
+                  <button className="mob-change" onClick=${closeBook}>
+                    ↩ Change book
+                  </button>
+                </div>
+              </div>
+
+              <!-- Left: cover + controls (desktop only, sticky) -->
+              <div className="player-left">
+                <div className="cover" style=${{ "--spine": book.spine }}>
+                  ${book.coverUrl
+                    ? html`<img
+                        src=${book.coverUrl}
+                        alt=${book.title}
+                        className="cover-img"
+                      />`
+                    : html`<div className="ctitle">${book.title}</div>`}
+                </div>
+                <div className="meta">
+                  <div className="btitle">${book.title}</div>
+                  <div className="bsub">${estLength(book.chars)}</div>
+                </div>
+
+                <div className="scrub">
+                  <div
+                    className="track"
+                    role="slider"
+                    aria-label="Position in book"
+                    tabindex="0"
+                    aria-valuemin="1"
+                    aria-valuemax=${E.chunks.length}
+                    aria-valuenow=${E.idx + 1}
+                    onClick=${onSeek}
+                    onTouchStart=${onSeek}
+                  >
+                    <div className="rail"></div>
+                    <div className="fill" ref=${fillRef}></div>
+                    <div className="knob" ref=${knobRef}></div>
+                  </div>
+                  <div className="times">
+                    <span ref=${tLeft}>0:00</span>
+                    <span ref=${tRight}>Part 1 of ${E.chunks.length}</span>
+                  </div>
+                </div>
+
+                <div className="transport">
+                  <button
+                    className="skip"
+                    onClick=${() => eng.skip(-1)}
+                    disabled=${E.idx === 0}
+                    aria-label="Back one part"
+                  >
+                    <${IBack} />
+                  </button>
+                  <button
+                    className="playbtn"
+                    onClick=${() => eng.toggle()}
+                    aria-label=${E.playing ? "Pause" : "Play"}
+                  >
+                    ${busy
+                      ? html`<div className="spinner"></div>`
+                      : E.playing
+                        ? html`<${IPause} />`
+                        : html`<${IPlay} />`}
+                  </button>
+                  <button
+                    className="skip"
+                    onClick=${() => eng.skip(1)}
+                    disabled=${E.idx >= E.chunks.length - 1}
+                    aria-label="Forward one part"
+                  >
+                    <${IFwd} />
+                  </button>
+                </div>
+
+                <div className="traits">
+                  <button
+                    className="trait"
+                    onClick=${cycleRate}
+                    aria-label="Change speed"
+                  >
+                    <span className="val">${RATES[rateI]}×</span
+                    ><span className="lbl">Speed</span>
+                  </button>
+                  <button
+                    className="trait"
+                    onClick=${cycleVoice}
+                    aria-label="Change voice"
+                  >
+                    <span className="val">${voice}</span
+                    ><span className="lbl">Voice</span>
+                  </button>
+                  <button
+                    className="trait"
+                    onClick=${cycleAmbient}
+                    aria-label="Change background sound"
+                  >
+                    <span className="val">${ambient}</span
+                    ><span className="lbl">Sound</span>
+                  </button>
+                </div>
+
+                <button className="change-book-btn" onClick=${closeBook}>
+                  ↩ Change book
+                </button>
+              </div>
+
+              <!-- Right: text reader (Unconfined, flowing natively) -->
+              <div className="reader" role="document" aria-label="Book text">
+                ${book.chunks.map(
+                  (chunk, i) => html`
+                    <p
+                      key=${i}
+                      className="chunk"
+                      onClick=${() => eng.seekToChunk(i)}
+                      aria-label=${"Part " + (i + 1)}
+                    >
+                      ${chunk}
+                    </p>
+                  `,
+                )}
+              </div>
+            </div>
+
+            <!-- Mobile fixed bottom bar -->
+            <div
+              className="bottom-bar"
+              role="region"
+              aria-label="Playback controls"
+            >
+              <div className="bb-scrub">
+                <div
+                  className="track"
+                  role="slider"
+                  aria-label="Position in book"
+                  tabindex="0"
+                  aria-valuemin="1"
+                  aria-valuemax=${E.chunks.length}
+                  aria-valuenow=${E.idx + 1}
+                  onClick=${onSeek}
+                  onTouchStart=${onSeek}
+                >
+                  <div className="rail"></div>
+                  <div className="fill" ref=${fillRef}></div>
+                  <div className="knob" ref=${knobRef}></div>
+                </div>
+                <div className="bb-times">
+                  <span ref=${tLeft}>0:00</span>
+                  <span ref=${tRight}>Part 1 of ${E.chunks.length}</span>
+                </div>
+              </div>
+              <div className="bb-controls">
+                <div className="bb-chips">
+                  <button
+                    className="bb-chip"
+                    onClick=${cycleRate}
+                    aria-label="Change speed"
+                  >
+                    ${RATES[rateI]}×
+                  </button>
+                  <button
+                    className="bb-chip"
+                    onClick=${cycleVoice}
+                    aria-label="Change voice"
+                  >
+                    ${voice}
+                  </button>
+                </div>
+                <div className="bb-transport">
+                  <button
+                    className="bb-skip"
+                    onClick=${() => eng.skip(-1)}
+                    disabled=${E.idx === 0}
+                    aria-label="Back one part"
+                  >
+                    <${IBack} size=${20} />
+                  </button>
+                  <button
+                    className="bb-play"
+                    onClick=${() => eng.toggle()}
+                    aria-label=${E.playing ? "Pause" : "Play"}
+                  >
+                    ${busy
+                      ? html`<div className="spinner"></div>`
+                      : E.playing
+                        ? html`<${IPause} size=${20} />`
+                        : html`<${IPlay} size=${20} />`}
+                  </button>
+                  <button
+                    className="bb-skip"
+                    onClick=${() => eng.skip(1)}
+                    disabled=${E.idx >= E.chunks.length - 1}
+                    aria-label="Forward one part"
+                  >
+                    <${IFwd} size=${20} />
+                  </button>
+                </div>
+                <div className="bb-chips">
+                  <button
+                    className="bb-chip"
+                    onClick=${cycleAmbient}
+                    aria-label="Sound"
+                  >
+                    ${ambient}
+                  </button>
+                  <button
+                    className="iconbtn bb-chip"
+                    style=${{
+                      borderRadius: "99px",
+                      height: "auto",
+                      padding: "5px 10px",
+                    }}
+                    onClick=${closeBook}
+                    aria-label="Change book"
+                  >
+                    ↩
+                  </button>
+                </div>
+              </div>
+            </div>`;
+
+        return html` <div className="shell">
+          <header className="bar">
+            <span className="wordmark">Softcover</span>
+            <span className="bar-actions">
+              <button
+                id="dark-mode-toggle"
+                className="iconbtn"
+                onClick=${() => setDark((d) => !d)}
+                aria-label=${dark
+                  ? "Switch to light mode"
+                  : "Switch to dark mode"}
+              >
+                ${dark ? html`<${ISun} />` : html`<${IMoon} />`}
+              </button>
+            </span>
+          </header>
+
+          ${screen === "empty" && html`<${Empty} />`}
+          ${screen === "loading" && html`<${Loading} />`}
+          ${screen === "player" && book && html`<${Player} />`}
+          ${settings &&
+          html` <div
+              className="scrim"
+              onClick=${() => setSettings(false)}
+            ></div>
+            <div className="sheet" role="dialog" aria-label="Settings">
+              <h2>Gemini API key</h2>
+              <p>
+                Speech is generated with Gemini. Your key stays in this browser
+                only.
+              </p>
+              <${KeyField} initial=${apiKey} onSave=${saveKey} />
+              <p className="fine">
+                Get a free key at
+                <a
+                  className="linkish"
+                  href="https://aistudio.google.com/apikey"
+                  target="_blank"
+                  rel="noreferrer"
+                  >aistudio.google.com/apikey</a
+                >
+              </p>
+            </div>`}
+          ${toast && html`<div className="toast" role="status">${toast}</div>`}
+        </div>`;
+      }
+
+      function KeyField({ initial, onSave }) {
+        const [v, setV] = useState(initial);
+        return html` <div className="field">
+          <input
+            type="password"
+            placeholder="AIza…"
+            value=${v}
+            autocomplete="off"
+            onChange=${(e) => setV(e.target.value)}
+            onKeyDown=${(e) => {
+              if (e.key === "Enter") onSave(v);
+            }}
+          />
+          <button className="savebtn" onClick=${() => onSave(v)}>Save</button>
+        </div>`;
+      }
+
+      ReactDOM.createRoot(document.getElementById("root")).render(
+        html`<${App} />`,
+      );
+    </script>
+  </body>
+</html>
